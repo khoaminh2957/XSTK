@@ -1,0 +1,6 @@
+﻿KĐ,Câu hỏi,H0,H1,Kiểm định chính,Kiểm tra lại,Hệ số ảnh hưởng
+KĐ1,CH2,μ(tự động) = μ(số sàn),μ(tự động) > μ(số sàn) — một phía,Welch t-test,Mann-Whitney U (một phía),Cohen's d; r hạng hai dãy
+KĐ2,CH3,μ(Diesel) = μ(Petrol) = μ(CNG/LPG),Có ít nhất một cặp khác nhau,Welch ANOVA + Games-Howell,Kruskal-Wallis + Dunn (Holm),η²; ε²
+KĐ3,CH3,μ bằng nhau ở 4 mức số đời chủ,Có ít nhất một cặp khác nhau,Welch ANOVA + Games-Howell,Kruskal-Wallis + Dunn (Holm),η²; ε²
+KĐ4,CH3,"ρs(owner_rank, giá) = 0",ρs ≠ 0,Tương quan Spearman,—,r_s
+KĐ5,CH4,fuel_group và transmission độc lập,Không độc lập,Chi-bình phương (E ≥ 5),Fisher 2×2 (Diesel–Petrol),Cramér's V
