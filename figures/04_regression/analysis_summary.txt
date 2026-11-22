@@ -1,0 +1,436 @@
+Task 4 - Regression 2: Data Preparation Summary
+Source file: Data\cleaned_cars.csv
+
+Data checks:
+Dataset shape: 6693 rows x 22 columns
+Missing values (total): 3
+Missing values by column:
+  raw_index: 0
+  name: 0
+  brand: 0
+  model: 0
+  year: 0
+  car_age: 0
+  selling_price: 0
+  log_price: 0
+  km_driven: 0
+  fuel: 0
+  fuel_group: 0
+  seller_type: 0
+  is_trustmark: 0
+  transmission: 0
+  owner: 0
+  owner_rank: 0
+  mileage: 0
+  mileage_unit: 0
+  engine: 0
+  max_power: 0
+  torque_nm: 3
+  seats: 0
+
+Data types:
+  raw_index: int64
+  name: object
+  brand: object
+  model: object
+  year: int64
+  car_age: int64
+  selling_price: int64
+  log_price: float64
+  km_driven: int64
+  fuel: object
+  fuel_group: object
+  seller_type: object
+  is_trustmark: int64
+  transmission: object
+  owner: object
+  owner_rank: int64
+  mileage: float64
+  mileage_unit: object
+  engine: int64
+  max_power: float64
+  torque_nm: float64
+  seats: int64
+
+Target variable:
+  log_price = log(selling_price)
+
+Model variables:
+  Numeric: year, km_driven, mileage, engine, max_power
+  Categorical: fuel, transmission, seller_type, owner, brand
+  Target: selling_price, log_price
+  Excluded: name, model, car_age, fuel_group
+
+Train/Test split:
+  Test size: 20%
+  random_state: 42
+Train shape: 5354 rows x 22 columns
+Test shape: 1339 rows x 22 columns
+
+Scope:
+  No one-hot encoding performed.
+  No MLR model built.
+  No Stepwise, VIF, Breusch-Pagan, or Durbin-Watson tests run.
+  No additional observations or columns removed.
+
+
+Task 4 - Regression 2: Encoding and Baseline MLR Summary
+
+One-hot encoding:
+  Categorical variables: fuel, transmission, seller_type, owner, brand
+  Numeric variables retained: year, km_driven, mileage, engine, max_power
+  drop_first: True
+  X_train shape: (5354, 43)
+  X_test shape: (1339, 43)
+  Number of predictors: 43
+  Missing values in X_train: 0
+  Missing values in X_test: 0
+  X_train and X_test have identical columns: True
+  TEST columns reindexed to the TRAIN structure; missing dummy columns filled with 0.
+
+Target variables:
+  y_train: train_df["log_price"]
+  y_test: test_df["log_price"]
+
+Baseline Full MLR on TRAIN:
+  Model: statsmodels OLS with constant
+  Fit dataset: TRAIN only
+  R2: 0.8904950037821643
+  Adjusted R2: 0.889608240159308
+  AIC: 389.87023457995565
+  BIC: 679.6366004394888
+  RMSE on TRAIN (log_price): 0.2488892055422623
+
+Scope:
+  No Stepwise AIC/BIC performed.
+  No VIF performed.
+  No residual diagnostics performed.
+  TEST was not used for variable selection or model evaluation at this stage.
+
+
+Task 4 - Regression 2: Stepwise Backward Elimination Summary
+
+AIC stepwise model:
+  Method: Backward elimination on TRAIN only
+  Predictors retained: 36
+  AIC: 377.7075642048603
+  BIC: 621.3747354958314
+  R2: 0.8904574185561881
+  Adjusted R2: 0.8897157347247084
+  Removed predictors (7):
+    brand_Audi
+    brand_BMW
+    brand_Daewoo
+    brand_Lexus
+    brand_MG
+    brand_Mercedes-Benz
+    brand_Opel
+
+BIC stepwise model:
+  Method: Backward elimination on TRAIN only
+  Predictors retained: 27
+  AIC: 400.9849663302539
+  BIC: 585.3817446045023
+  R2: 0.8896096209952244
+  Adjusted R2: 0.8890500002229509
+  Removed predictors (16):
+    fuel_LPG
+    fuel_Petrol
+    transmission_Manual
+    brand_Ashok Leyland
+    brand_Audi
+    brand_BMW
+    brand_Daewoo
+    brand_Jaguar
+    brand_Kia
+    brand_Land Rover
+    brand_Lexus
+    brand_MG
+    brand_Mercedes-Benz
+    brand_Mitsubishi
+    brand_Opel
+    brand_Volvo
+
+Scope:
+  X_test and y_test were not used for stepwise selection.
+  At stepwise-selection stage, VIF/residual diagnostics/HC3/Cook's distance were not performed.
+
+
+Task 4 - Regression 2: VIF Summary
+
+Method:
+  VIF calculated on TRAIN only using X_train without the constant/intercept.
+  No numerical or identifiability warnings were reported.
+
+Full MLR:
+  Number of predictors: 43
+  Largest VIF: year (2154.557594)
+  VIF > 5: 26
+  VIF > 10: 24
+  Top 10:
+    year 2154.557594
+    brand_Maruti 568.154560
+    brand_Hyundai 321.140793
+    brand_Mahindra 189.820379
+    brand_Tata 177.897465
+    brand_Honda 99.538230
+    brand_Ford 95.311290
+    brand_Toyota 85.522522
+    fuel_Diesel 79.627213
+    mileage 76.665341
+
+Stepwise AIC:
+  Number of predictors: 36
+  Largest VIF: year (455.278566)
+  VIF > 5: 12
+  VIF > 10: 10
+  Top 10:
+    year 455.278566
+    fuel_Diesel 79.618500
+    mileage 76.009615
+    fuel_Petrol 65.930290
+    engine 56.447556
+    max_power 26.608048
+    brand_Maruti 26.400874
+    transmission_Manual 17.608631
+    brand_Hyundai 14.329638
+    seller_type_Individual 10.977905
+
+Stepwise BIC:
+  Number of predictors: 27
+  Largest VIF: year (233.666816)
+  VIF > 5: 10
+  VIF > 10: 7
+  Top 10:
+    year 233.666816
+    mileage 73.307108
+    engine 55.326761
+    max_power 24.654566
+    brand_Maruti 20.469928
+    brand_Hyundai 10.898391
+    seller_type_Individual 10.858381
+    brand_Mahindra 7.075186
+    brand_Tata 6.556181
+    fuel_Diesel 5.870459
+
+engine and max_power:
+  TRAIN correlation: 0.6814375811925355
+  Full MLR: both present
+    engine VIF: 56.82237889925705
+    max_power VIF: 27.30973515820089
+  Stepwise AIC: both present
+    engine VIF: 56.44755585846149
+    max_power VIF: 26.608047669795415
+  Stepwise BIC: both present
+    engine VIF: 55.32676146733439
+    max_power VIF: 24.654565985072857
+  No automatic removal performed.
+
+
+Task 4 - Regression 2: Residual Diagnostic Plots
+
+Dataset: TRAIN only
+Figures directory: duratation result_v2/diagnostics
+
+Stepwise AIC:
+  residual_aic_vs_fitted.png
+  residual_aic_qq.png
+  residual_aic_scale_location.png
+  residual_aic_leverage.png
+
+Stepwise BIC:
+  residual_bic_vs_fitted.png
+  residual_bic_qq.png
+  residual_bic_scale_location.png
+  residual_bic_leverage.png
+
+Scope:
+  These plots were generated without BP/DW/Shapiro-Wilk tests.
+  No HC3, TEST metrics, observations, or models changed.
+
+
+Task 4 - Regression 2: Residual Tests (TRAIN only, alpha=0.05)
+
+Stepwise AIC:
+  Breusch-Pagan LM statistic: 484.726078
+  Breusch-Pagan LM p-value: 5.74605e-80
+  Breusch-Pagan F statistic: 14.702674
+  Breusch-Pagan F p-value: 2.62699e-84
+  Conclusion: Evidence of heteroscedasticity.
+  Durbin-Watson: 1.958732
+  Shapiro-Wilk W: 0.984327
+  Shapiro-Wilk p-value: 6.42467e-24
+  Conclusion: Evidence residuals depart from normality.
+  SciPy warning: For N > 5000, computed p-value may not be accurate; N=5354.
+
+Stepwise BIC:
+  Breusch-Pagan LM statistic: 458.253888
+  Breusch-Pagan LM p-value: 6.07435e-80
+  Breusch-Pagan F statistic: 18.463952
+  Breusch-Pagan F p-value: 6.20208e-84
+  Conclusion: Evidence of heteroscedasticity.
+  Durbin-Watson: 1.953879
+  Shapiro-Wilk W: 0.983718
+  Shapiro-Wilk p-value: 2.32072e-24
+  Conclusion: Evidence residuals depart from normality.
+  SciPy warning: For N > 5000, computed p-value may not be accurate; N=5354.
+
+Comparison:
+  Both models show evidence of heteroscedasticity and non-normal residuals.
+  Durbin-Watson values are reported descriptively only; these are cross-sectional data.
+  No TEST data, HC3, Cook's distance, leverage analysis, or model selection was used.
+
+
+Task 4 - Regression 2: HC3 and Influence Measures (TRAIN only)
+
+HC3 significance comparison at p < 0.05:
+  Stepwise AIC: significance changed for 4 predictors:
+    brand_Jaguar
+    brand_Kia
+    brand_Land Rover
+    brand_Volvo
+  Stepwise BIC: significance changed for 0 predictors.
+  Coefficients/models were not changed.
+
+Stepwise AIC Cook's Distance:
+  n: 5354
+  Reference threshold 4/n: 0.00074710
+  Observations above threshold: 256
+  Top observations (train_index, raw_index, Cook's Distance):
+    3463, 4011, 39084040
+    448, 488, 0.109340
+    2495, 2826, 0.033297
+    981, 1067, 0.029679
+    4017, 4787, 0.028653
+    1723, 1969, 0.027752
+    2562, 2898, 0.025467
+    6676, 8108, 0.024827
+    3629, 4253, 0.021615
+    4467, 5349, 0.021467
+
+Stepwise AIC leverage:
+  Reference threshold 2(p+1)/n: 0.01382144 (p=36)
+  Top leverage (train_index, raw_index, leverage):
+    3463, 4011, 1.000000
+    130, 135, 0.501532
+    5578, 6724, 0.501532
+    1735, 1982, 0.336427
+    448, 488, 0.335215
+    4082, 4882, 0.335183
+    981, 1067, 0.334661
+    2339, 2627, 0.334389
+    6676, 8108, 0.334082
+    6107, 7336, 0.252556
+
+Stepwise BIC Cook's Distance:
+  n: 5354
+  Reference threshold 4/n: 0.00074710
+  Observations above threshold: 316
+  Top observations (train_index, raw_index, Cook's Distance):
+    6107, 7336, 0.018903
+    6612, 8042, 0.011413
+    4891, 5836, 0.008898
+    3971, 4715, 0.008673
+    39, 41, 0.007799
+    4619, 5511, 0.007245
+    1735, 1982, 0.006978
+    4785, 5726, 0.006909
+    6322, 7631, 0.006432
+    4989, 5962, 0.005848
+
+Stepwise BIC leverage:
+  Reference threshold 2(p+1)/n: 0.01045947 (p=27)
+  Top leverage (train_index, raw_index, leverage):
+    1735, 1982, 0.336387
+    4082, 4882, 0.335167
+    2339, 2627, 0.334358
+    6107, 7336, 0.252380
+    4891, 5836, 0.251970
+    3619, 4196, 0.251138
+    6411, 7746, 0.250294
+    164, 170, 0.075711
+    129, 134, 0.069203
+    2501, 2832, 0.061580
+
+No observations were removed. The unusually high AIC leverage and Cook's Distance for
+train_index 3463 (raw_index 4011) were reported without modifying the data.
+
+
+Targeted Review: Stepwise AIC raw_index 4011
+
+Original observation:
+  raw_index: 4011
+  name: Ashok Leyland Stile LE
+  brand/model: Ashok Leyland / Stile
+  year/car_age: 2013 / 7
+  selling_price/log_price: 300000 / 12.611538
+  km_driven: 200000
+  fuel/fuel_group: Diesel / Diesel
+  seller_type/transmission: Individual / Manual
+  is_trustmark: 0
+  owner/owner_rank: Second Owner / 2
+  mileage/mileage_unit: 20.07 / kmpl
+  engine/max_power/torque_nm/seats: 1461 / 75.0 / 185.0 / 8
+  Ashok Leyland frequency in source data: 1
+
+Stepwise AIC diagnostics for this row:
+  train_index: 3463
+  fitted log_price: 12.611537753648884
+  residual: -1.0546230555519287e-11
+  standardized residual (internal): -0.0012670848943409094
+  leverage: 0.99999999999999889 (1 - leverage = 1.1102230246251565e-15)
+  Cook's Distance: 39084042.15788636
+  Manual Cook's Distance formula matched statsmodels' computed value.
+
+Interpretation:
+  The value printed as leverage 1.0 is not merely display rounding: the fitted value
+  is within floating-point precision of 1. The row is the only Ashok Leyland record,
+  and Stepwise AIC retains its brand dummy, giving that singleton row essentially
+  perfect leverage and fitting it almost exactly.
+  Cook's Distance formula contains terms that become numerically unstable as
+  leverage approaches 1. The reported enormous finite Cook's Distance is therefore
+  not a reliable ordinary influence magnitude; deleting this singleton also leaves
+  its brand dummy unsupported. The row is unusual in model design/leverage, but not
+  a residual outlier or an evident source-data error.
+
+Comparison observations:
+  Stepwise AIC next-highest Cook's Distance: raw_index 488 (0.109340),
+    raw_index 2826 (0.033297).
+  Stepwise AIC next-highest leverage: raw_index 135 (0.501532),
+    raw_index 6724 (0.501532).
+  Stepwise BIC top Cook's Distance: raw_index 7336 (0.018903),
+    raw_index 8042 (0.011413), raw_index 5836 (0.008898).
+  Stepwise BIC top leverage: raw_index 1982 (0.336387),
+    raw_index 4882 (0.335167), raw_index 2627 (0.334358).
+
+Recommendation:
+  Keep the raw observation; no deletion or value modification is warranted from
+  these checks. If AIC is considered for the final model, address the singleton
+  brand level/model specification explicitly rather than treating the computed
+  Cook's Distance as a normal finite influence score.
+
+
+Task 4 - Final Model Selection and TEST Evaluation
+
+Selection based on TRAIN results:
+  Selected model: Stepwise BIC
+  Reason: it retains 27 predictors instead of 36, has lower BIC and lower
+  maximum VIF, does not retain the singleton Ashok Leyland dummy with leverage
+  near 1, and no predictors change p<0.05 significance under HC3. Its TRAIN
+  R2/adjusted R2 are only slightly lower than AIC. Both models show evidence
+  of heteroscedasticity and non-normal residuals.
+  TEST was not used for model selection.
+
+Final Stepwise BIC refit on TRAIN:
+  Predictors: 27
+  R2: 0.8896096209952244
+  Adjusted R2: 0.8890500002229509
+  Intercept: -222.46906970105087
+  Coefficients and full equation are printed in the notebook's final-model section.
+
+TEST evaluation (predicted log_price exponentiated to selling_price):
+  RMSE: 183991.48072176523
+  MAE: 99640.57766505903
+  R2 on selling_price scale: 0.8654692304885909
+  Test rows: 1339
+  No TEST observations or predictors were used to refit/select the model.
