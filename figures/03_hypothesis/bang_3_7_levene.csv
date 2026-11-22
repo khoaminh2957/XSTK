@@ -1,0 +1,4 @@
+﻿Biến,Số nhóm k,W (Brown-Forsythe),df1,df2,p,ĐLC lớn nhất / nhỏ nhất,Cỡ nhóm lớn nhất / nhỏ nhất,Kết luận
+Hộp số,2,18.162358121770957,1,6691,2.0563307266591985e-05,1.1504798444503292,10.825088339222615,Bác bỏ H0: phương sai khác nhau → dùng phiên bản Welch
+Nhiên liệu,3,10.895826199703299,2,6690,1.8866571649994287e-05,1.5894142638128268,42.95294117647059,Bác bỏ H0: phương sai khác nhau → dùng phiên bản Welch
+Số đời chủ,4,13.957574527842333,3,6689,4.543752177765018e-09,1.1029685426432447,27.22222222222222,Bác bỏ H0: phương sai khác nhau → dùng phiên bản Welch
