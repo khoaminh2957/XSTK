@@ -1,0 +1,23 @@
+﻿Biến,Nhóm,Giá trị gốc,Tần số,Tỷ lệ (%)
+fuel,Dầu,Diesel,3651,54.5
+fuel,Xăng,Petrol,2957,44.2
+fuel,CNG,CNG,50,0.7
+fuel,LPG,LPG,35,0.5
+seller_type,Cá nhân,Individual,6009,89.8
+seller_type,Đại lý,Dealer,684,10.2
+transmission,Số sàn,Manual,6127,91.5
+transmission,Số tự động,Automatic,566,8.5
+owner,1 đời chủ,First Owner,4165,62.2
+owner,2 đời chủ,Second Owner,1883,28.1
+owner,3 đời chủ,Third Owner,492,7.4
+owner,Từ 4 đời chủ,Fourth & Above Owner,153,2.3
+brand,Maruti,Maruti,2087,31.2
+brand,Hyundai,Hyundai,1206,18.0
+brand,Mahindra,Mahindra,706,10.5
+brand,Tata,Tata,632,9.4
+brand,Honda,Honda,360,5.4
+brand,Ford,Ford,353,5.3
+brand,Toyota,Toyota,324,4.8
+brand,Chevrolet,Chevrolet,216,3.2
+brand,Renault,Renault,206,3.1
+brand,Volkswagen,Volkswagen,170,2.5
